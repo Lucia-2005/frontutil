@@ -3,7 +3,7 @@
 <nav>
     <ul class="pagination">
         <li class="page-item" [class.disabled]="numPage==0">
-            <a class="page-link" (click)="goToPage(numPage-1)">Previous</a>
+            <a class="page-link" (click)="goToPage(numPage-1)" href="#">Previous</a>
         </li>
         @for (strBotonera of oBotonera; track strBotonera ) {
 
@@ -11,12 +11,12 @@
         <li class="page-item"><span class="page-link">{{strBotonera}}</span></li>
         } @else {
         <li class="page-item" [class.active]="-(-strBotonera) ==(numPage + 1)">
-            <a class="page-link" (click)="goToPage((-(-strBotonera))-1)">{{strBotonera}}</a>
+            <a class="page-link" (click)="goToPage((-(-strBotonera))-1)" href="#">{{strBotonera}}</a>
         </li>
         }
         }
         <li class="page-item" [class.disabled]="numPage+1==oPage?.totalPages">
-            <a class="page-link" (click)="goToPage(numPage+1)">Next</a>
+            <a class="page-link" (click)="goToPage(numPage+1)" href="#">Next</a>
         </li>
     </ul>
 </nav>

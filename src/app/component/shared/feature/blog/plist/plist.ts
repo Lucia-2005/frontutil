@@ -45,6 +45,7 @@ export class PlistBlog {
   goToPage(numPage: number) {
     this.numPage = numPage;
     this.getPage();
+    return false;
   }
 
 
