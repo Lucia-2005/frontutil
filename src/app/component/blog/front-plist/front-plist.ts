@@ -1,22 +1,22 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { IPage } from '../../../model/plist';
 import { IBlog } from '../../../model/blog';
 import { BlogService } from '../../../service/blog';
 import { Paginacion } from "../../shared/paginacion/paginacion";
-import { BotoneraRpp } from "../../shared/botonera-rpp/botonera-rpp";
+import { FrontViewPost } from "../front-view/front-view";
+
 
 @Component({
-  selector: 'app-plist',
-  imports: [RouterLink, Paginacion, BotoneraRpp],
-  templateUrl: './plist.html',
-  styleUrl: './plist.css',
+  selector: 'app-front-plist',
+  imports: [Paginacion, FrontViewPost],
+  templateUrl: './front-plist.html',
+  styleUrl: './front-plist.css',
 })
-export class PlistBlog {
+export class FrontPlist {
   oPage: IPage<IBlog> | null = null;
   numPage: number = 0;
-  numRpp: number = 5;
+  numRpp: number = 2;  
 
   constructor(private oBlogService: BlogService) { }
 
