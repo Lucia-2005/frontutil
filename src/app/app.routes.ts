@@ -7,6 +7,13 @@ import { RoutedUserView } from './component/blog/routed-user-view/routed-user-vi
 import { RoutedAdminEdit } from './component/blog/routed-admin-edit/routed-admin-edit';
 import { RoutedAdminNew } from './component/blog/routed-admin-new/routed-admin-new';
 import { RoutedAdminRemove } from './component/blog/routed-admin-remove/routed-admin-remove';
+import { RoutedAdminPlistCalinescu } from './component/calinescu/routed-admin-plist/routed-admin-plist';
+import { RoutedAdminViewCalinescu } from './component/calinescu/routed-admin-view/routed-admin-view';
+import { RoutedAdminNewCalinescu } from './component/calinescu/routed-admin-new/routed-admin-new';
+import { RoutedAdminEditCalinescu } from './component/calinescu/routed-admin-edit/routed-admin-edit';
+import { RoutedAdminRemoveCalinescu } from './component/calinescu/routed-admin-remove/routed-admin-remove';
+import { RoutedUserPlistCalinescu } from './component/calinescu/routed-user-plist/routed-user-plist';
+import { RoutedUserViewCalinescu } from './component/calinescu/routed-user-view/routed-user-view';
 import { RoutedUserPlistGarcia } from './component/garcia/routed-user-plistGarcia/Garciarouted-user-plist';
 import { RoutedUserViewGarcia } from './component/garcia/routed-user-viewGarcia/Garciarouted-user-view';
 import { RoutedAdminPlistGarcia } from './component/garcia/routed-admin-plistGarcia/Garciarouted-admin-plist';
@@ -112,6 +119,13 @@ export const routes: Routes = [
   { path: 'blog/new', component: RoutedAdminNew },
   { path: 'blog/edit/:id', component: RoutedAdminEdit },
   { path: 'blog/remove/:id', component: RoutedAdminRemove },
+  { path: 'calinescu', component: RoutedUserPlistCalinescu },
+  { path: 'calinescu/item/:id', component: RoutedUserViewCalinescu },
+  { path: 'calinescu/plist', component: RoutedAdminPlistCalinescu },
+  { path: 'calinescu/view/:id', component: RoutedAdminViewCalinescu },
+  { path: 'calinescu/new', component: RoutedAdminNewCalinescu },
+  { path: 'calinescu/edit/:id', component: RoutedAdminEditCalinescu },
+  { path: 'calinescu/remove/:id', component: RoutedAdminRemoveCalinescu },
   { path: 'garcia', component: RoutedUserPlistGarcia},
   { path: 'garcia/post/:id', component: RoutedUserViewGarcia },
   { path: 'garcia/plist', component: RoutedAdminPlistGarcia },
