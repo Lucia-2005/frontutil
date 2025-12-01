@@ -7,6 +7,13 @@ import { RoutedUserView } from './component/blog/routed-user-view/routed-user-vi
 import { RoutedAdminEdit } from './component/blog/routed-admin-edit/routed-admin-edit';
 import { RoutedAdminNew } from './component/blog/routed-admin-new/routed-admin-new';
 import { RoutedAdminRemove } from './component/blog/routed-admin-remove/routed-admin-remove';
+import { AlcaldeRoutedAdminPlist } from './component/alcalde/routed-admin-plist/routed-admin-plist';
+import { AlcaldeRoutedAdminView } from './component/alcalde/routed-admin-view/routed-admin-view';
+import { AlcaldeRoutedAdminNew } from './component/alcalde/routed-admin-new/routed-admin-new';
+import { AlcaldeRoutedAdminEdit } from './component/alcalde/routed-admin-edit/routed-admin-edit';
+import { AlcaldeRoutedAdminRemove } from './component/alcalde/routed-admin-remove/routed-admin-remove';
+import { AlcaldeRoutedUserPlist } from './component/alcalde/routed-user-plist/routed-user-plist';
+import { AlcaldeRoutedUserView } from './component/alcalde/routed-user-view/routed-user-view';
 import { SemperteguiRoutedUserPlist } from './component/sempertegui/routed-user-plist/sempertegui-routed-user-plist';
 import { SemperteguiRoutedAdminPlist } from './component/sempertegui/routed-admin-plist/sempertegui-routed-admin-plist';
 import { SemperteguiRoutedAdminView } from './component/sempertegui/routed-admin-view/sempertegui-routed-admin-view';
@@ -40,6 +47,13 @@ export const routes: Routes = [
   { path: 'blog/new', component: RoutedAdminNew },
   { path: 'blog/edit/:id', component: RoutedAdminEdit },
   { path: 'blog/remove/:id', component: RoutedAdminRemove },
+  { path: 'alcalde', component: AlcaldeRoutedUserPlist },
+  { path: 'alcalde/post/:id', component: AlcaldeRoutedUserView },
+  { path: 'alcalde/plist', component: AlcaldeRoutedAdminPlist },
+  { path: 'alcalde/view/:id', component: AlcaldeRoutedAdminView },
+  { path: 'alcalde/new', component: AlcaldeRoutedAdminNew },
+  { path: 'alcalde/edit/:id', component: AlcaldeRoutedAdminEdit },
+  { path: 'alcalde/remove/:id', component: AlcaldeRoutedAdminRemove },
   { path: 'sempertegui', component: SemperteguiRoutedUserPlist },
   { path: 'sempertegui/plist', component: SemperteguiRoutedAdminPlist },
   { path: 'sempertegui/view/:id', component: SemperteguiRoutedAdminView},
