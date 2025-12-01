@@ -45,6 +45,14 @@ import { RoutedAlcanyizAdminEdit } from './component/alcanyiz/routed-alcanyiz-ad
 import { RoutedAlcanyizAdminRemove } from './component/alcanyiz/routed-alcanyiz-admin-remove/routed-alcanyiz-admin-remove';
 import { RoutedAlcanyizGame } from './component/alcanyiz/routed-alcanyiz-game/routed-alcanyiz-game';
 
+//imports Contreras
+import { RoutedUserPlist as TablonRoutedUserPlist } from './component/contreras/tablon/routed-user-plist/routed-user-plist';
+import { RoutedUserView as TablonRoutedUserView } from './component/contreras/tablon/routed-user-view/routed-user-view';
+import { RoutedAdminPlist as TablonRoutedAdminPlist } from './component/contreras/tablon/routed-admin-plist/routed-admin-plist';
+import { RoutedAdminView as TablonRoutedAdminView } from './component/contreras/tablon/routed-admin-view/routed-admin-view';
+import { RoutedAdminNew as TablonRoutedAdminNew } from './component/contreras/tablon/routed-admin-new/routed-admin-new';
+import { RoutedAdminEdit as TablonRoutedAdminEdit } from './component/contreras/tablon/routed-admin-edit/routed-admin-edit';
+import { RoutedAdminRemove as TablonRoutedAdminRemove } from './component/contreras/tablon/routed-admin-remove/routed-admin-remove';
 import { RoutedAdminPlistZanon } from './component/zanon/routed-admin-plist/routed-admin-plist';
 import { RoutedAdminViewZanon } from './component/zanon/routed-admin-view/routed-admin-view';
 import { RoutedUserPlistZanon } from './component/zanon/routed-user-plist/routed-user-plist';
@@ -98,6 +106,13 @@ export const routes: Routes = [
   { path: 'soares/admin/new', component: SoaresRoutedAdminNew },
   { path: 'soares/admin/edit/:id', component: SoaresRoutedAdminEdit },
   { path: 'soares/admin/remove/:id', component: SoaresRoutedAdminRemove },
+  { path: 'tablon', component: TablonRoutedUserPlist },
+  { path: 'tablon/post/:id', component: TablonRoutedUserView },
+  { path: 'tablon/plist', component: TablonRoutedAdminPlist },
+  { path: 'tablon/view/:id', component: TablonRoutedAdminView },
+  { path: 'tablon/new', component: TablonRoutedAdminNew },
+  { path: 'tablon/edit/:id', component: TablonRoutedAdminEdit },
+  { path: 'tablon/remove/:id', component: TablonRoutedAdminRemove },
 
   { path: 'zanon', component: RoutedUserPlistZanon},
   { path: 'zanon/post/:id', component: RoutedUserViewZanon },
