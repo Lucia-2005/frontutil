@@ -5,7 +5,6 @@ import { ICastanyera } from '../../../model/castanyera';
 import { CastanyeraService } from '../../../service/castanyera';
 import { Paginacion } from '../../shared/paginacion/paginacion';
 import { CastanyeraUnroutedUserView2 } from '../castanyera-unrouted-user-view2/unrouted-user-view2';
-import { forkJoin, map } from 'rxjs';
 
 @Component({
   selector: 'castanyera-app-routed-user-plist',
@@ -27,23 +26,14 @@ export class CastanyeraRoutedUserPlist {
   }
 
   getPublicPage() {
-    const page$ = this.oCastanyeraService.getPublicPage(this.numPage, this.numRpp, 'fecha_creacion', 'desc');
-    const count$ = this.oCastanyeraService.countPublic();
-
-    forkJoin([page$, count$]).pipe(
-      map(([pageData, countPublic]) => {
-        pageData.content = pageData.content || [];
-        // Defensive filter in case backend returned non-public items
-        pageData.content = pageData.content.filter((item) => item.publico === true);
-        if (typeof countPublic === 'number') {
-          pageData.totalElements = countPublic;
-          pageData.totalPages = Math.max(1, Math.ceil(countPublic / this.numRpp));
-        }
-        return pageData;
-      })
-    ).subscribe({
+    this.oCastanyeraService.getPublicPage(this.numPage, this.numRpp).subscribe({
       next: (data: IPage<ICastanyera>) => {
+        
+        // Filtrar client-side para mostrar solo publicaciones públicas
+        data.content = data.content.filter((item) => item.publico === true);
+        data.numberOfElements = data.content.length;
         this.oPage = data;
+        // OJO! si estamos en una página que supera el límite entonces nos situamos en la ultima disponible
         if (this.numPage > 0 && this.numPage >= data.totalPages) {
           this.numPage = data.totalPages - 1;
           this.getPublicPage();
@@ -51,7 +41,7 @@ export class CastanyeraRoutedUserPlist {
       },
       error: (error: HttpErrorResponse) => {
         console.error(error);
-      }
+      },
     });
   }
 
