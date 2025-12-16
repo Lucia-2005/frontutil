@@ -59,4 +59,38 @@ export class CastanyeraService {
       })
     );
   }
+
+  getPublicPage(
+    page: number,
+    rpp: number,
+    order: string = '',
+    direction: string = ''
+  ): Observable<IPage<ICastanyera>> {
+    if (order === '') {
+      order = 'id';
+    }
+    if (direction === '') {
+      direction = 'asc';
+    }
+    const url =
+      serverURL +
+      `/castanyera?page=${page}&size=${rpp}&sort=${order},${direction}`;
+    return this.oHttp.get<IPage<ICastanyera>>(url).pipe(
+      tap((resp) => console.debug('Castanyera.getPublicPage response:', resp)),
+      catchError((err) => {
+        console.error('Castanyera.getPublicPage error:', err);
+        return throwError(() => err);
+      })
+    );
+  }
+
+  countPublic(): Observable<number> {
+    return this.oHttp.get<number>(serverURL + '/castanyera/countPublic').pipe(
+      tap((resp) => console.debug('Castanyera.countPublic response:', resp)),
+      catchError((err) => {
+        console.error('Castanyera.countPublic error:', err);
+        return throwError(() => err);
+      })
+    );
+  }
 }
