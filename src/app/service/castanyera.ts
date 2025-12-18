@@ -3,13 +3,17 @@ import { Injectable } from '@angular/core';
 import { serverURL } from '../environment/environment';
 import { IPage } from '../model/plist';
 import { ICastanyera } from '../model/castanyera';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, tap, throwError, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CastanyeraService {
   constructor(private oHttp: HttpClient) {}
+
+  private toCamel(s: string): string {
+    return s.replace(/_([a-z])/g, (_m, c) => c.toUpperCase());
+  }
 
   getPage(
     page: number,
@@ -23,13 +27,30 @@ export class CastanyeraService {
     if (direction === '') {
       direction = 'asc';
     }
-    return this.oHttp.get<IPage<ICastanyera>>(
-      serverURL + `/castanyera?page=${page}&size=${rpp}&sort=${order},${direction}`
+    const orderParam = order;
+    const url = serverURL + `/castanyera?page=${page}&size=${rpp}&sort=${orderParam},${direction}`;
+    return this.oHttp.get<IPage<any>>(url).pipe(
+      map((page) => ({
+        ...page,
+        content: (page.content || []).map((c: any) => ({
+          ...c,
+          publico: c.publico ?? c.publico ?? false,
+          fecha_creacion: c.fecha_creacion ?? c.fechaCreacion ?? null,
+          fecha_modificacion: c.fecha_modificacion ?? c.fechaModificacion ?? null,
+        })),
+      }))
     );
   }
 
   get(id: number): Observable<ICastanyera> {
-    return this.oHttp.get<ICastanyera>(serverURL + '/castanyera/' + id);
+    return this.oHttp.get<any>(serverURL + '/castanyera/' + id).pipe(
+      map((c: any) => ({
+        ...c,
+        publico: c.publico ?? c.publico ?? false,
+        fecha_creacion: c.fecha_creacion ?? c.fechaCreacion ?? null,
+        fecha_modificacion: c.fecha_modificacion ?? c.fechaModificacion ?? null,
+      }))
+    );
   }
 
   /**
@@ -37,7 +58,13 @@ export class CastanyeraService {
    * Backend should honor the `publico=true` query param and return 404/403 if not public.
    */
   getIfPublic(id: number): Observable<ICastanyera> {
-    return this.oHttp.get<ICastanyera>(serverURL + '/castanyera/' + id + '?publico=true').pipe(
+    return this.oHttp.get<any>(serverURL + '/castanyera/' + id + '?publico=true').pipe(
+      map((c: any) => ({
+        ...c,
+        publico: c.publico ?? c.publico ?? false,
+        fecha_creacion: c.fecha_creacion ?? c.fechaCreacion ?? null,
+        fecha_modificacion: c.fecha_modificacion ?? c.fechaModificacion ?? null,
+      })),
       tap((resp) => console.debug('Castanyera.getIfPublic response:', resp)),
       catchError((err) => {
         console.error('Castanyera.getIfPublic error:', err);
@@ -74,6 +101,14 @@ export class CastanyeraService {
     );
   }
 
+  publicar(id: number): Observable<number> {
+    return this.oHttp.put<number>(serverURL + '/castanyera/publicar/' + id, {});
+  }
+
+  despublicar(id: number): Observable<number> {
+    return this.oHttp.put<number>(serverURL + '/castanyera/despublicar/' + id, {});
+  }
+
   getPublicPage(
     page: number,
     rpp: number,
@@ -86,9 +121,20 @@ export class CastanyeraService {
     if (direction === '') {
       direction = 'asc';
     }
+    const orderParam = order;
     const url =
-      serverURL + `/castanyera?page=${page}&size=${rpp}&sort=${order},${direction}&publico=true`;
-    return this.oHttp.get<IPage<ICastanyera>>(url).pipe(
+      serverURL +
+      `/castanyera?page=${page}&size=${rpp}&sort=${orderParam},${direction}&publico=true`;
+    return this.oHttp.get<IPage<any>>(url).pipe(
+      map((page) => ({
+        ...page,
+        content: (page.content || []).map((c: any) => ({
+          ...c,
+          publico: c.publico ?? c.publico ?? false,
+          fecha_creacion: c.fecha_creacion ?? c.fechaCreacion ?? null,
+          fecha_modificacion: c.fecha_modificacion ?? c.fechaModificacion ?? null,
+        })),
+      })),
       tap((resp) => console.debug('Castanyera.getPublicPage response:', resp)),
       catchError((err) => {
         console.error('Castanyera.getPublicPage error:', err);

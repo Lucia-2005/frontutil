@@ -22,17 +22,17 @@ export class CastanyeraRoutedUserPlist {
   oBotonera: string[] = [];
 
   ngOnInit() {
-    this.getPublicPage();
+    this.getPage();
   }
 
-  getPublicPage() {
-    this.oCastanyeraService.getPublicPage(this.numPage, this.numRpp).subscribe({
+  getPage() {
+    this.oCastanyeraService.getPage(this.numPage, this.numRpp, 'fecha_creacion', 'desc').subscribe({
       next: (data: IPage<ICastanyera>) => {
         this.oPage = data;
         // OJO! si estamos en una página que supera el límite entonces nos situamos en la ultima disponible
         if (this.numPage > 0 && this.numPage >= data.totalPages) {
           this.numPage = data.totalPages - 1;
-          this.getPublicPage();
+          this.getPage();
         }
       },
       error: (error: HttpErrorResponse) => {
@@ -43,13 +43,13 @@ export class CastanyeraRoutedUserPlist {
 
   goToPage(numPage: number) {
     this.numPage = numPage;
-    this.getPublicPage();
+    this.getPage();
     return false;
   }
 
   onRppChange(n: number) {
     this.numRpp = n;
-    this.getPublicPage();
+    this.getPage();
     return false;
   }
 }
