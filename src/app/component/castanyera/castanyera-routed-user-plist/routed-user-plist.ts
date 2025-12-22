@@ -26,7 +26,7 @@ export class CastanyeraRoutedUserPlist {
   }
 
   getPage() {
-    this.oCastanyeraService.getPage(this.numPage, this.numRpp, 'fecha_creacion', 'desc').subscribe({
+    this.oCastanyeraService.getPage(this.numPage, this.numRpp, 'fechaCreacion', 'desc').subscribe({
       next: (data: IPage<ICastanyera>) => {
         this.oPage = data;
         // OJO! si estamos en una página que supera el límite entonces nos situamos en la ultima disponible
