@@ -175,11 +175,11 @@ export const routes: Routes = [
   //
   { path: 'recurso', component: RoutedUserPlistPavon },
   { path: 'recurso/post/:id', component: RoutedUserViewPavon },
-  { path: 'recurso/plist', component: RoutedAdminPlistPavon },
-  { path: 'recurso/view/:id', component: RoutedAdminViewPavon },
-  { path: 'recurso/new', component: RoutedAdminNewPavon },
-  { path: 'recurso/edit/:id', component: RoutedAdminEditPavon },
-  { path: 'recurso/remove/:id', component: RoutedAdminRemovePavon },
+  { path: 'recurso/plist', component: RoutedAdminPlistPavon, canActivate: [AdminGuard]  },
+  { path: 'recurso/view/:id', component: RoutedAdminViewPavon, canActivate: [AdminGuard]  },
+  { path: 'recurso/new', component: RoutedAdminNewPavon, canActivate: [AdminGuard]  },
+  { path: 'recurso/edit/:id', component: RoutedAdminEditPavon, canActivate: [AdminGuard]  },
+  { path: 'recurso/remove/:id', component: RoutedAdminRemovePavon, canActivate: [AdminGuard]  },
   //
   { path: 'silvestre', component: RoutedUserPlistSilvestre },
   { path: 'silvestre/post/:id', component: RoutedUserViewSilvestre },
